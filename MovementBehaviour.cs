@@ -12,22 +12,32 @@ public class MovementBehaviour : MonoBehaviour
 
 	[SerializeField]
 	private GameObject prefabToSpawn;
-	private Transform[] transforms = new Transform[10000];
+	[SerializeField]
+	private int objectsCount = 10000;
+	private Transform[] transforms;
 
 	private Vector3 movementSpeed = new Vector3(5f, 0f, 0f);
 
+	private void Awake()
+	{
+		transforms = new Transform[objectsCount];
+
+		for (int i = 0; i < objectsCount; i++)
+			transforms[i] = Instantiate(prefabToSpawn, transform).transform;
+	}
+
 	private void OnEnable()
 	{
-		for (int i = 0; i < 10000; i++)
-			transforms[i] = Instantiate(prefabToSpawn).transform;
+		for (int i = 0; i < objectsCount; i++)
+			transforms[i].gameObject.SetActive(true);
 
 		transformAccessArray = new TransformAccessArray(transforms);
 	}
 
 	private void OnDisable()
 	{
-		for (int i = 0; i < 10000; i++)
-			Destroy(transforms[i]);
+		for (int i = 0; i < objectsCount; i++)
+			transforms[i].gameObject.SetActive(false);
 
 		transformAccessArray.Dispose();
 	}
@@ -58,6 +68,6 @@ public struct MovementBehaviourJob : IJobParallelForTransform
 
 	public void Execute(int index, TransformAccess transform)
 	{
-		transform.position += movementSpeed * deltaTime;
+		transform.localPosition += movementSpeed * deltaTime;
 	}
 }
