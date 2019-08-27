@@ -19,10 +19,7 @@ public class MovementBehaviour : MonoBehaviour
 	private void OnEnable()
 	{
 		for (int i = 0; i < 10000; i++)
-		{
-			GameObject testObject = Instantiate(prefabToSpawn);
-			transforms[i] = testObject.transform;
-		}
+			transforms[i] = Instantiate(prefabToSpawn).transform;
 
 		transformAccessArray = new TransformAccessArray(transforms);
 	}
