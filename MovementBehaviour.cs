@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using Unity.Jobs;
 using UnityEngine.Jobs;
 using Unity.Burst;
@@ -20,8 +20,8 @@ public class MovementBehaviour : MonoBehaviour
 	{
 		for (int i = 0; i < 10000; i++)
 		{
-			GameObject tester = Instantiate(prefabToSpawn);
-			transforms[i] = tester.transform;
+			GameObject testObject = Instantiate(prefabToSpawn);
+			transforms[i] = testObject.transform;
 		}
 
 		transformAccessArray = new TransformAccessArray(transforms);
@@ -29,9 +29,9 @@ public class MovementBehaviour : MonoBehaviour
 
 	private void OnDisable()
 	{
-		for (int i = 0; i < 10000; i++) 
+		for (int i = 0; i < 10000; i++)
 			Destroy(transforms[i]);
-			
+
 		transformAccessArray.Dispose();
 	}
 
