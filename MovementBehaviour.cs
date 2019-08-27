@@ -40,7 +40,8 @@ public class MovementBehaviour : MonoBehaviour
 			deltaTime = Time.deltaTime
 		};
 
-		movementBehaviourHandle = movementBehaviourJob.Schedule(transformAccessArray, movementBehaviourHandle);
+		movementBehaviourHandle = movementBehaviourJob.Schedule(transformAccessArray);
+		JobHandle.ScheduleBatchedJobs();
 	}
 
 	private void LateUpdate()
