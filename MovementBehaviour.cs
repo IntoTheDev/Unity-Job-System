@@ -29,6 +29,9 @@ public class MovementBehaviour : MonoBehaviour
 
 	private void OnDisable()
 	{
+		for (int i = 0; i < 10000; i++) 
+			Destroy(transforms[i]);
+			
 		transformAccessArray.Dispose();
 	}
 
